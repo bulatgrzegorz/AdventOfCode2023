@@ -69,7 +69,7 @@ Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green
                    Math.Max(game.Rounds.Max(x => x.Blue), 1);
         }
         
-        Assert.Equal(2913, sum);
+        Assert.Equal(55593, sum);
     }
 
     public record struct Game(int Index, List<(int Red, int Green, int Blue)> Rounds)
