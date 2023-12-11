@@ -117,7 +117,7 @@ humidity-to-location map:
             locations.Add(lookFor);
         }
 
-        Assert.Equal(4361, locations.Min());
+        Assert.Equal(57075758, locations.Min());
     }
     
     [Fact]
