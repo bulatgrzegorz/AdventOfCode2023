@@ -1,18 +1,7 @@
-﻿using System.Collections.Frozen;
-using System.Collections.Immutable;
-using System.Threading.Channels;
-using Xunit.Abstractions;
-
-namespace adventOfCode2023;
+﻿namespace adventOfCode2023;
 
 public class Day8
 {
-    private readonly ITestOutputHelper _testOutputHelper;
-    public Day8(ITestOutputHelper testOutputHelper)
-    {
-        _testOutputHelper = testOutputHelper;
-    }
-    
     private const string ExampleInput1 = """
 RL
 
@@ -72,24 +61,32 @@ ZZZ = (ZZZ, ZZZ)
             r.Add(CountSteps2(instructions, nodeNetwork, startingNode));
         }
 
-        var a = LCM(r.ToArray());
+        var a = Lcm(r.ToArray());
 
         Assert.Equal(16342438708751, a);
     }
-    
-    static long LCM(long[] numbers)
+
+    private static long Lcm(long[] numbers)
     {
-        return numbers.Aggregate(LCM);
+        return numbers.Aggregate(Lcm);
     }
-    static long LCM(long a, long b)
+
+    private static long Lcm(long a, long b)
     {
-        return Math.Abs(a * b) / GCD(a, b);
+        return Math.Abs(a * b) / Gcd(a, b);
     }
-    static long GCD(long a, long b)
+
+    private static long Gcd(long a, long b)
     {
-        return b == 0 ? a : GCD(b, a % b);
+        while (true)
+        {
+            if (b == 0) return a;
+            var a1 = a;
+            a = b;
+            b = a1 % b;
+        }
     }
-    
+
     private int CountSteps2(char[] instructions, Dictionary<string, (string, string)> nodeNetwork, string startingNode)
     {
         var steps = 0;
